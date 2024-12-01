@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: word_of_wisdom_server
+    environment:
+      - SERVER_PORT=8080    
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: word_of_wisdom_client
+    depends_on:
+      - server
+    environment:
+      - SERVER_HOST=server
+      - SERVER_PORT=8080
+
+networks:
+  word-of-wisdom-network:
+    driver: bridge
