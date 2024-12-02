@@ -3,7 +3,6 @@ package main
 import (
 	"net"
 	"testing"
-	"time"
 )
 
 // Mock server to simulate the challenge-response server
@@ -49,7 +48,5 @@ func TestClient(t *testing.T) {
 	server := startMockServer(t)
 	defer server.Close()
 
-	go runClient("localhost", "8080")
-
-	time.Sleep(1 * time.Second) // Allow the client to finish
+	runClient("localhost", "8080")
 }
