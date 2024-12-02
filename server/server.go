@@ -26,11 +26,16 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-	hasPrefix := os.Getenv("HASH_PREFIX")
-	if hasPrefix == "" {
-		hasPrefix = "abc"
+	hashPrefix := os.Getenv("HASH_PREFIX")
+	if hashPrefix == "" {
+		hashPrefix = "abc"
 	}
 
+	runServer(hashPrefix, port)
+
+}
+
+func runServer(hashPrefix, port string) {
 	// Set timeout for listening connection
 	listener, err := net.Listen("tcp", ":"+port)
 	if err != nil {
@@ -46,7 +51,7 @@ func main() {
 			log.Printf("Failed to accept connection: %v", err)
 			continue
 		}
-		go handleConnection(hasPrefix, conn)
+		go handleConnection(hashPrefix, conn)
 	}
 }
 

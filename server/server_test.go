@@ -2,17 +2,16 @@ package main
 
 import (
 	"context"
-	"dilshat/faraway/pkg"
 	"net"
-	"os"
 	"strings"
 	"testing"
 	"time"
+
+	"dilshat/faraway/pkg"
 )
 
 func TestServer(t *testing.T) {
-	os.Setenv("SERVER_PORT", "8080")
-	go main()
+	go runServer("abc", "8080")
 
 	// Create a client to connect to the server
 	conn, err := net.Dial("tcp", "localhost:8080")

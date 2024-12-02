@@ -2,15 +2,13 @@ package main
 
 import (
 	"net"
-	"os"
 	"testing"
 	"time"
 )
 
 // Mock server to simulate the challenge-response server
 func startMockServer(t *testing.T) net.Listener {
-	os.Setenv("SERVER_HOST", "localhost")
-	os.Setenv("SERVER_PORT", "8080")
+
 	ln, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		t.Fatalf("Failed to start mock server: %v", err)
@@ -51,7 +49,7 @@ func TestClient(t *testing.T) {
 	server := startMockServer(t)
 	defer server.Close()
 
-	go main()
+	go runClient("localhost", "8080")
 
 	time.Sleep(1 * time.Second) // Allow the client to finish
 }

@@ -22,6 +22,10 @@ func main() {
 		port = "8080"
 	}
 
+	runClient(host, port)
+}
+
+func runClient(host, port string) {
 	conn, err := net.DialTimeout("tcp", host+":"+port, 5*time.Second)
 	if err != nil {
 		log.Fatalf("Failed to connect to server: %v", err)
